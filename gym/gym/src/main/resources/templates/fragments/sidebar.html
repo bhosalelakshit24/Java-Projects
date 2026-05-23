@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="sidebar(activePage)">
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">GA</div>
+
+        <nav class="sidebar-nav">
+            <a th:href="@{/dashboard}"
+               class="sidebar-link"
+               th:classappend="${activePage == 'dashboard'} ? ' active'">
+                ⬤
+            </a>
+            <a th:href="@{/dashboard}"
+               class="sidebar-link"
+               th:classappend="${activePage == 'dashboard'} ? ' active'">
+                ◎
+            </a>
+            <a th:href="@{/members}"
+               class="sidebar-link"
+               th:classappend="${activePage == 'members'} ? ' active'">
+                🏃
+            </a>
+            <a th:href="@{/chat}"
+               class="sidebar-link"
+               th:classappend="${activePage == 'chat'} ? ' active'">
+                💬
+            </a>
+            <a th:href="@{/profile}"
+               class="sidebar-link"
+               th:classappend="${activePage == 'profile'} ? ' active'">
+                ⚙
+            </a>
+        </nav>
+
+    </aside>
+</div>
+
+</body>
+</html>

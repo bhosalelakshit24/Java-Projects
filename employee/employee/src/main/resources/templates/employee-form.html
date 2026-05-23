@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${employee.id} != null ? 'Edit Employee' : 'Add Employee'">Employee</title>
+    <link rel="stylesheet" th:href="@{/css/employee.css}">
+</head>
+<body>
+
+<div class="layout">
+    <header class="topbar">
+        <h1 th:text="${employee.id} != null ? 'Edit Employee' : 'Add Employee'">Add Employee</h1>
+        <a th:href="@{/employees}" class="btn">Back</a>
+    </header>
+
+    <main>
+        <div class="form-card">
+            <form th:action="@{/employees/save}" th:object="${employee}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+
+                <label>Full Name</label>
+                <input type="text" th:field="*{fullName}" required>
+
+                <label>Department</label>
+                <input type="text" th:field="*{department}" required>
+
+                <label>Job Title</label>
+                <input type="text" th:field="*{jobTitle}" required>
+
+                <label>Email</label>
+                <input type="email" th:field="*{email}" required>
+
+                <label>Phone</label>
+                <input type="text" th:field="*{phone}" required>
+
+                <label>Salary</label>
+                <input type="number" step="0.01" th:field="*{salary}" required>
+
+                <label>Join Date</label>
+                <input type="date" th:field="*{joinDate}" required>
+
+                <div class="form-actions">
+                    <a th:href="@{/employees}" class="btn">Cancel</a>
+                    <button type="submit" class="btn primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

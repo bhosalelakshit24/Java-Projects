@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile – Gym</title>
+    <link rel="stylesheet" th:href="@{/css/gym-dashboard.css}">
+</head>
+<body>
+<div class="gym-app">
+
+    <div th:replace="fragments/sidebar :: sidebar('profile')"></div>
+
+    <main class="gym-main">
+        <header class="gym-topbar">
+            <h2>Profile</h2>
+        </header>
+
+        <section class="card profile-card">
+            <div class="profile-main">
+                <div class="avatar-big"
+                     th:text="${loggedUser != null ? #strings.substring(loggedUser,0,1) : 'U'}">U</div>
+                <div class="profile-info">
+                    <h3 th:text="${loggedUser}">User Name</h3>
+                    <p>Gym Admin • since 2025</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div>
+                    <h4>Personal Info</h4>
+                    <p>Email: example@gym.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                </div>
+                <div>
+                    <h4>Membership Info</h4>
+                    <p>Role: Admin</p>
+                    <p>Branches: Main Branch</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

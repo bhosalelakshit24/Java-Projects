@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, rgba(76,161,252,0.6), rgba(120,255,214,0.6));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+input {
+  width: 360px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+input:focus {
+  border-color: #4c6fff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76,111,255,0.2);
+}
+
+button {
+  width: 360px;
+  padding: 12px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background-image: linear-gradient(90deg, #7f5cff, #4adede);
+  margin-top: 10px;
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+.auth-switch {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-switch a {
+  text-decoration: underline;
+  font-weight: 600;
+  color: #111827;
+}

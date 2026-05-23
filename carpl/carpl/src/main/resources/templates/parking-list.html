@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Parking | Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <div class="header-bar">
+        <div>
+            <h2>Car Parking Dashboard</h2>
+            <p th:text="'Welcome, ' + ${userName}">Welcome</p>
+        </div>
+        <div>
+            <a th:href="@{/parking/new}" class="btn">+ Add Parking</a>
+            <a th:href="@{/logout}" class="btn btn-secondary">Logout</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vehicle No.</th>
+            <th>Owner</th>
+            <th>Slot</th>
+            <th>Status</th>
+            <th>In Time</th>
+            <th>Out Time</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${records}">
+            <td th:text="${p.id}">1</td>
+            <td th:text="${p.vehicleNumber}">GJ01 AB 1234</td>
+            <td th:text="${p.ownerName}">Owner Name</td>
+            <td th:text="${p.slotNumber}">A1</td>
+            <td th:text="${p.status}">PARKED</td>
+            <td th:text="${p.inTime}"></td>
+            <td th:text="${p.outTime}">-</td>
+            <td>
+                <a th:href="@{'/parking/edit/' + ${p.id}}" class="btn btn-secondary">Edit</a>
+                <a th:href="@{'/parking/delete/' + ${p.id}}" class="btn btn-danger"
+                   onclick="return confirm('Delete this record?');">Delete</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(records)}">
+            <td colspan="8">No parking records yet. Add one using the button above.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${formTitle}">Recipe Form</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="logo">🍽️ Digital Recipe Maker</div>
+    <nav>
+        <a th:href="@{/home}">Back to Home</a>
+    </nav>
+</header>
+
+<main class="container form-page">
+    <h1 th:text="${formTitle}">Recipe Form</h1>
+
+    <form th:object="${recipe}"
+          th:action="${recipe.id} == null ? @{/recipes} : @{/recipes/{id}(id=${recipe.id})}"
+          method="post"
+          class="recipe-form">
+
+        <div class="form-group">
+            <label for="title">Recipe Title</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients (one per line)</label>
+            <textarea id="ingredients" rows="6" th:field="*{ingredients}" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions / Steps</label>
+            <textarea id="instructions" rows="8" th:field="*{instructions}" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Save Recipe</button>
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Manager</title>
+    <link rel="stylesheet" th:href="@{/css/employee.css}">
+</head>
+<body>
+
+<div class="layout">
+    <header class="topbar">
+        <div>
+            <h1>Employees</h1>
+            <p th:text="'Welcome, ' + ${name}">Welcome</p>
+        </div>
+        <div>
+            <a th:href="@{/employees/new}" class="btn primary">+ Add Employee</a>
+            <a th:href="@{/logout}" class="btn">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Job Title</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Salary</th>
+                <th>Join Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="e : ${employees}">
+                <td th:text="${e.id}">1</td>
+                <td th:text="${e.fullName}">John Doe</td>
+                <td th:text="${e.department}">IT</td>
+                <td th:text="${e.jobTitle}">Developer</td>
+                <td th:text="${e.email}">john@example.com</td>
+                <td th:text="${e.phone}">1234567890</td>
+                <td th:text="${e.salary}">50000</td>
+                <td th:text="${e.joinDate}">2025-01-01</td>
+                <td>
+                    <a th:href="@{'/employees/edit/' + ${e.id}}" class="btn small">Edit</a>
+                    <a th:href="@{'/employees/delete/' + ${e.id}}" class="btn small danger"
+                       onclick="return confirm('Delete this employee?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(employees)}">
+                <td colspan="9">No employees yet. Click "Add Employee" to create one.</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+</body>
+</html>

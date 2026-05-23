@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${formTitle}">Parking Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container" style="max-width: 600px;">
+    <h2 th:text="${formTitle}">Add Parking</h2>
+
+    <form th:action="@{/parking/save}" th:object="${parking}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label>Vehicle Number</label>
+        <input type="text" th:field="*{vehicleNumber}" placeholder="GJ01 AB 1234" required>
+
+        <label>Owner Name</label>
+        <input type="text" th:field="*{ownerName}" required>
+
+        <label>Slot Number</label>
+        <input type="text" th:field="*{slotNumber}" placeholder="A1" required>
+
+        <label>Status</label>
+        <select th:field="*{status}">
+            <option value="PARKED">PARKED</option>
+            <option value="LEFT">LEFT</option>
+        </select>
+
+        <button type="submit">Save</button>
+        <a th:href="@{/parking/list}" class="btn btn-secondary" style="margin-left:8px;">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

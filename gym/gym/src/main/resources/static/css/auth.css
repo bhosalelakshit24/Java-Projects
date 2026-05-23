@@ -1,0 +1,106 @@
+/* auth.css – shared for login & register */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top left, #1f2937, #020617);
+    color: #f9fafb;
+}
+
+/* main card */
+.auth-card {
+    width: 360px;
+    padding: 32px 28px;
+    border-radius: 18px;
+    background: #020617;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* headings */
+.auth-card h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.auth-card p.subtitle {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 20px;
+}
+
+/* form */
+.auth-card label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #9ca3af;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #111827;
+    background: #020617;
+    color: #f9fafb;
+    font-size: 13px;
+    outline: none;
+    margin-bottom: 14px;
+}
+
+.auth-card input:focus {
+    border-color: #22c55e;
+}
+
+/* button */
+.auth-card button,
+.auth-card input[type="submit"] {
+    width: 100%;
+    padding: 11px 0;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, #22c55e, #0ea5e9);
+    color: #f9fafb;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+/* bottom text */
+.auth-card .switch-auth {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.auth-card .switch-auth a {
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-card .switch-auth a:hover {
+    text-decoration: underline;
+}
+
+/* error message */
+.auth-error {
+    font-size: 12px;
+    color: #f97373;
+    margin-bottom: 8px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${record.id} != null ? 'Edit Blood Record' : 'Add Blood Record'">
+        Blood Record
+    </title>
+    <link rel="stylesheet" th:href="@{/css/blood.css}">
+</head>
+<body>
+
+<div class="layout">
+    <header class="topbar">
+        <h1 th:text="${record.id} != null ? 'Edit Blood Record' : 'Add Blood Record'"></h1>
+        <a th:href="@{/blood}" class="btn">Back</a>
+    </header>
+
+    <main>
+        <div class="form-card">
+            <form th:action="@{/blood/save}" th:object="${record}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+
+                <label>Donor Name</label>
+                <input type="text" th:field="*{donorName}" required>
+
+                <label>Blood Group</label>
+                <input type="text" th:field="*{bloodGroup}" placeholder="A+, B-, O+, ..." required>
+
+                <label>Units</label>
+                <input type="number" th:field="*{units}" min="1" required>
+
+                <label>City</label>
+                <input type="text" th:field="*{city}" required>
+
+                <label>Hospital</label>
+                <input type="text" th:field="*{hospital}" required>
+
+                <label>Contact Number</label>
+                <input type="text" th:field="*{contactNumber}" required>
+
+                <label>Donation Date</label>
+                <input type="date" th:field="*{donationDate}" required>
+
+                <label>Status</label>
+                <select th:field="*{status}">
+                    <option value="AVAILABLE">AVAILABLE</option>
+                    <option value="USED">USED</option>
+                </select>
+
+                <div class="form-actions">
+                    <a th:href="@{/blood}" class="btn">Cancel</a>
+                    <button type="submit" class="btn primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

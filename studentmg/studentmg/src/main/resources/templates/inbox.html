@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inbox – Student Management</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<div class="app">
+
+    <div th:replace="fragments/sidebar :: sidebar('inbox')"></div>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Inbox</h1>
+                <span class="breadcrumb">Dashboard / Inbox</span>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search email" />
+                </div>
+                <div class="user-chip">
+                    <div class="avatar-circle"
+                         th:text="${loggedUser != null ? #strings.substring(loggedUser,0,1) : 'U'}">U</div>
+                    <div class="user-info">
+                        <span class="user-name" th:text="${loggedUser}">User</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="layout-three-col">
+
+            <div class="card small-card">
+                <div class="card-title">Category</div>
+                <ul class="simple-list">
+                    <li><strong>All Inbox</strong> (25)</li>
+                    <li>Starred</li>
+                    <li>Sent</li>
+                    <li>Drafts</li>
+                    <li>Spam</li>
+                    <li>Trash</li>
+                </ul>
+                <div class="list-heading">Label</div>
+                <ul class="simple-list">
+                    <li>Academic</li>
+                    <li>Events</li>
+                    <li>Finance</li>
+                    <li>Administration</li>
+                </ul>
+            </div>
+
+            <div class="card small-card">
+                <div class="card-title">Messages</div>
+                <div class="search-box small">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search sender or subject">
+                </div>
+
+                <div class="message-list">
+                    <div class="message-item active">
+                        <div class="msg-from">Finance Office</div>
+                        <div class="msg-subject">Reminder: Fee Payment Deadline</div>
+                        <div class="msg-meta">Today • 10:30 AM</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="msg-from">Principal's Office</div>
+                        <div class="msg-subject">Exam Timetable Announcement</div>
+                        <div class="msg-meta">Yesterday • 5:15 PM</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="msg-from">Sports Department</div>
+                        <div class="msg-subject">Annual Sports Meet Details</div>
+                        <div class="msg-meta">2 days ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Reminder: Fee Payment Deadline</div>
+                <div class="email-meta">
+                    From: Finance Office &lt;finance@school.org&gt;<br>
+                    To: You • Today, 10:30 AM
+                </div>
+                <div class="email-body">
+                    Dear Admin,<br><br>
+                    This is a gentle reminder that all pending student fee payments must be
+                    completed by <strong>15 March</strong>. Please make sure records are updated
+                    in the Finance section of the dashboard.<br><br>
+                    Thank you for your cooperation.<br>
+                    — Finance Office
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
+</body>
+</html>

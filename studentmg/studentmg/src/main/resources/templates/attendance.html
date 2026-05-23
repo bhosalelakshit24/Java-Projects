@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students Attendance – Student Management</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<div class="app">
+
+    <div th:replace="fragments/sidebar :: sidebar('attendance')"></div>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Students Attendance</h1>
+                <span class="breadcrumb">Dashboard / Students / Attendance</span>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <span>🔍</span><input type="text" placeholder="Search student"/>
+                </div>
+                <div class="user-chip">
+                    <div class="avatar-circle"
+                         th:text="${loggedUser != null ? #strings.substring(loggedUser,0,1) : 'U'}">U</div>
+                    <div class="user-info">
+                        <span class="user-name" th:text="${loggedUser}">User</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="card card-main">
+            <div class="card-header-row">
+                <h2 class="card-title">Today’s Attendance</h2>
+                <div class="card-actions">
+                    <input type="date" class="date-input">
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="students-table">
+                    <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="s : ${students}">
+                        <td class="student-cell">
+                            <div class="avatar-circle small">
+                                <span th:text="${#strings.substring(s.name,0,1)}">S</span>
+                            </div>
+                            <div class="student-meta">
+                                <div class="student-name" th:text="${s.name}">Student Name</div>
+                                <div class="student-id" th:text="${'S-' + s.id}">S-0001</div>
+                            </div>
+                        </td>
+                        <td th:text="${s.year}">First Year</td>
+                        <td th:text="${s.course}">BCA</td>
+                        <!-- For now we show everyone Present (you can extend with real attendance entity later) -->
+                        <td><span class="pill pill-good">Present</span></td>
+                        <td><span class="comment-muted">On time</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span>Showing <strong th:text="${#lists.size(students)}">0</strong> students</span>
+            </div>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>

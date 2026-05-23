@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Notes</title>
+    <link rel="stylesheet" th:href="@{/css/notes.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          referrerpolicy="no-referrer"/>
+</head>
+<body class="notes-body">
+
+<div class="app-shell">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <i class="fa-regular fa-clipboard"></i>
+            </div>
+            <div class="logo-text">
+                <span class="logo-name">Note<span>Plus</span></span>
+            </div>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="avatar">
+                <span th:text="${#strings.substring(name,0,1)}">U</span>
+            </div>
+            <div class="user-info">
+                <span class="user-name" th:text="${name}">User Name</span>
+                <span class="user-role">Writer</span>
+            </div>
+        </div>
+
+        <div class="sidebar-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search"/>
+        </div>
+
+        <button class="btn-add" onclick="window.location.href='[[${#urls.expression('/notes/new')}]]'">
+            <span>+ Add New</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <i class="fa-regular fa-note-sticky"></i>
+                <span>Your Notes</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-book"></i>
+                <span>Notebooks</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-bell"></i>
+                <span>Reminder</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-tags"></i>
+                <span>Tags</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-trash-can"></i>
+                <span>Bin</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-area">
+
+        <header class="main-header">
+            <div>
+                <h1>Your Notes</h1>
+                <p th:text="'Welcome, ' + ${name}">Welcome, User</p>
+            </div>
+            <div class="main-actions">
+                <!-- later: notifications, settings etc -->
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab active">All</button>
+            <button class="tab">Shared Notes</button>
+            <button class="tab">Pin Notes</button>
+            <button class="tab">Favourite Notes</button>
+        </div>
+
+        <!-- NOTES GRID -->
+        <section class="notes-grid">
+            <!-- Each note card -->
+            <article class="note-card"
+                     th:each="note,iter : ${notes}">
+                <div class="note-card-inner">
+                    <div class="note-card-header">
+                        <div class="note-icon">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <div class="note-menu">
+                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="note-title" th:text="${note.title}">Note title</h2>
+
+                    <p class="note-preview"
+                       th:text="${#strings.abbreviate(note.content, 120)}">
+                        Short preview of the note goes here…
+                    </p>
+
+                    <div class="note-meta">
+                        <div class="meta-left">
+                            <i class="fa-regular fa-user"></i>
+                            <span>Only You</span>
+                        </div>
+                        <div class="meta-right">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <span th:text="${#temporals.format(note.createdAt, 'dd MMM yyyy')}">
+                                12 Jan 2021
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="note-actions">
+                        <a th:href="@{'/notes/edit/' + ${note.id}}" class="chip edit">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </a>
+                        <a th:href="@{'/notes/delete/' + ${note.id}}" class="chip delete"
+                           onclick="return confirm('Delete this note?');">
+                            <i class="fa-regular fa-trash-can"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Empty state -->
+            <div class="empty-state" th:if="${#lists.isEmpty(notes)}">
+                <h3>No notes yet</h3>
+                <p>Click <strong>Add New</strong> on the left to create your first note.</p>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f3f5fb;
+  color: #111827;
+}
+
+/* ========== PAGE & BANNER ========== */
+
+.page {
+  padding: 20px;
+}
+
+.banner {
+  max-width: 1100px;
+  margin: 0 auto 16px;
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 24px 40px;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+  background-image: radial-gradient(circle at 0 0, #e5f2ff 0, transparent 60%),
+                    radial-gradient(circle at 100% 0, #e5f9ff 0, transparent 60%);
+}
+
+.banner-left,
+.banner-right {
+  display: flex;
+  justify-content: center;
+}
+
+.banner-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+}
+
+.banner-subtitle {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.banner-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ========== MAIN CARD ========== */
+
+.card {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(15,23,42,0.12);
+  padding: 18px 24px 26px;
+}
+
+/* top bar inside the card */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stack-icon {
+  font-size: 20px;
+  color: #2563eb;
+}
+
+.card-header-left h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.card-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* buttons & logout */
+.btn-primary {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(37,99,235,0.35);
+}
+
+.logout-form {
+  margin: 0;
+}
+
+.logout-form button {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+/* ========== SECTIONS ========== */
+
+.section {
+  margin-top: 18px;
+}
+
+.section-title-bar {
+  border-radius: 8px;
+  background: #e5f3ff;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+}
+
+.section-title-bar h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.filter-row label {
+  margin-right: 10px;
+}
+
+.filter-row input[type="checkbox"] {
+  margin-right: 4px;
+}
+
+.empty-state {
+  font-size: 14px;
+  padding: 10px 0 4px;
+}
+
+/* ========== TABLE STYLES ========== */
+
+.table-wrapper {
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  overflow-x: auto;
+}
+
+.table-wrapper.small-table {
+  margin-top: 6px;
+}
+
+.assignment-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.assignment-table thead {
+  background: #f3f4f6;
+}
+
+.assignment-table th,
+.assignment-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.assignment-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.assignment-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* pills and statuses */
+
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+.pill-course {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.pill-status {
+  font-weight: 500;
+}
+
+.pill-status.inprogress {
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.pill-status.done {
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+/* days left coloring */
+
+.days-positive {
+  color: #166534;
+}
+
+.days-today {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.days-overdue {
+  color: #b91c1c;
+}
+
+/* action buttons in table */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-muted,
+.btn-danger,
+.btn-success {
+  border-radius: 999px;
+  border: none;
+  padding: 3px 9px;
+  font-size: 11px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-muted {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-success {
+  background: #bbf7d0;
+  color: #166534;
+}
+
+/* ========== ADD / EDIT ASSIGNMENT FORM ========== */
+
+/* assignment-form.html wraps content with <main class="container form-page"> */
+
+.form-page {
+  margin-top: 20px;
+}
+
+/* the white card containing the form */
+.form-page .assignment-form {
+  background: #ffffff;
+  padding: 18px 22px;
+  border-radius: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.10);
+}
+
+.form-page h1 {
+  max-width: 700px;
+  margin: 0 auto 14px;
+  font-size: 22px;
+}
+
+/* fields */
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* submit button for form */
+
+.btn-primary {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(37,99,235,0.35);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 720px) {
+
+  .banner {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .banner-left,
+  .banner-right {
+    display: none;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .card-header-right {
+    flex-wrap: wrap;
+  }
+
+  .page {
+    padding: 12px;
+  }
+
+  .form-page .assignment-form,
+  .form-page h1 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Assignment Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h1 class="auth-title">Welcome back</h1>
+
+        <div th:if="${param.error}" class="auth-alert auth-alert-error">
+            Invalid username or password
+        </div>
+        <div th:if="${param.logout}" class="auth-alert auth-alert-success">
+            Logged out successfully
+        </div>
+
+        <form th:action="@{/login}" method="post" class="auth-form">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <div class="auth-field">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="auth-btn-primary">Sign in</button>
+        </form>
+
+        <p class="auth-switch">
+            Don’t have an account?
+            <a th:href="@{/register}">Create one</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

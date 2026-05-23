@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Student Management</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h1 class="auth-title">Create account</h1>
+
+        <div th:if="${error}" class="auth-alert auth-alert-error" th:text="${error}"></div>
+
+        <form th:action="@{/register}" method="post" class="auth-form">
+
+            <div class="auth-field">
+                <label for="username">Your username</label>
+                <input id="username" type="text" name="username" placeholder="student_admin" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="confirmPassword">Repeat your password</label>
+                <input id="confirmPassword" type="password" name="confirmPassword"
+                       placeholder="Repeat password" required>
+            </div>
+
+            <button type="submit" class="auth-btn-primary">Sign up</button>
+        </form>
+
+        <p class="auth-switch">
+            Have already an account ?
+            <a th:href="@{/login}">Login here</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

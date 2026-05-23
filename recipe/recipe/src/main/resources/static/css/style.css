@@ -1,0 +1,188 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project: Colorlib Login Form
+Version: 1.0
+Author: Colorlib
+-------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+
+body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    background: #f8f9fa;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: #222;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+# Main Layout
+--------------------------------------------------------------*/
+
+.main {
+    background: #f8f9fa;
+    padding: 60px 0;
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.sign-in, .sign-up {
+    margin-top: 80px;
+}
+
+/*--------------------------------------------------------------
+# Form Layout
+--------------------------------------------------------------*/
+
+.signin-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signin-image {
+    width: 50%;
+    text-align: center;
+}
+
+.signin-form {
+    width: 45%;
+}
+
+.signin-form .form-title {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group input {
+    padding: 10px 40px 10px 15px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #999;
+    background: transparent;
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #999;
+    transition: 0.3s;
+}
+
+/* Icon next to input */
+.form-group i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.form-group input:focus {
+    border-bottom-color: #6c63ff;
+}
+
+.form-group input:focus ~ label {
+    color: #6c63ff;
+}
+
+.form-button input.form-submit {
+    background: #6c63ff;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.form-button input.form-submit:hover {
+    background: #5146d9;
+}
+
+/*--------------------------------------------------------------
+# Social Login
+--------------------------------------------------------------*/
+
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-login .social-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.social-login ul.socials {
+    list-style: none;
+    padding-left: 0;
+}
+
+.social-login ul.socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-login ul.socials li i {
+    padding: 10px;
+    border-radius: 50%;
+    background: #6c63ff;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.social-login ul.socials li i:hover {
+    background: #5146d9;
+}
+
+/*--------------------------------------------------------------
+# Image
+--------------------------------------------------------------*/
+
+.signin-image img {
+    max-width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Responsive Layout
+--------------------------------------------------------------*/
+
+@media screen and (max-width: 768px) {
+    .signin-content {
+        flex-direction: column;
+    }
+
+    .signin-image {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .signin-form {
+        width: 100%;
+    }
+}

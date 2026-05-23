@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz App | Auth</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --greenSeaweed: rgba(2, 128, 144, 1);
+            --blueQueen:   rgba(69, 105, 144, 1);
+            --redFire:     rgba(244, 91, 105, 1);
+            --fontAsap: 'Asap', sans-serif;
+        }
+
+        body {
+            background-color: var(--redFire);
+            font-family: var(--fontAsap);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* container that holds both cards */
+        .auth-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Wavy LOGIN card (center) */
+        .login-card {
+            overflow: hidden;
+            background-color: #ffffff;
+            padding: 40px 30px 30px 30px;
+            border-radius: 10px;
+
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 400px;
+            transform: translate(-50%, -50%);
+            transition: transform 300ms ease, box-shadow 300ms ease;
+
+            box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
+        }
+
+        .login-card::before,
+        .login-card::after {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-top-left-radius: 40%;
+            border-top-right-radius: 45%;
+            border-bottom-left-radius: 35%;
+            border-bottom-right-radius: 40%;
+            z-index: -1;
+        }
+
+        .login-card::before {
+            left: 40%;
+            bottom: -130%;
+            background-color: rgba(69, 105, 144, 0.15);
+            animation: waves 6s infinite linear;
+        }
+
+        .login-card::after {
+            left: 35%;
+            bottom: -125%;
+            background-color: rgba(2, 128, 144, 0.2);
+            animation: waves 7s infinite linear;
+        }
+
+        .login-card h2 {
+            margin: 0 0 10px;
+        }
+
+        .login-card form > input {
+            font-family: var(--fontAsap);
+            display: block;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #ffffff;
+            width: 100%;
+            border: 0;
+            padding: 10px 10px;
+            margin: 15px -10px;
+            box-sizing: border-box;
+        }
+
+        .login-card form > button {
+            font-family: var(--fontAsap);
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 16px;
+            text-transform: uppercase;
+            width: 90px;
+            border: 0;
+            padding: 10px 0;
+            margin-top: 10px;
+            margin-left: -5px;
+            border-radius: 5px;
+            background-color: var(--redFire);
+            transition: background-color 300ms ease;
+        }
+
+        .login-card form > button:hover {
+            background-color: #e44b59;
+        }
+
+        /* SIGN-UP card (below login) */
+        .signup-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 18px 22px 20px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+
+            position: absolute;
+            top: calc(45% + 210px); /* below login card */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+        }
+
+        .signup-card h3 {
+            margin: 0 0 10px;
+        }
+
+        .signup-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .signup-card label {
+            font-size: 13px;
+        }
+
+        .signup-card input {
+            padding: 7px 9px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .signup-card button {
+            margin-top: 8px;
+            border-radius: 999px;
+            border: 1px solid #2563eb;
+            background: #2563eb;
+            color: #f9fafb;
+            padding: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* alerts from backend (Thymeleaf) */
+        .alert {
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .alert.error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .alert.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* footer link */
+        .credits-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 12px;
+        }
+
+        @keyframes waves {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+
+    <!-- Wavy LOGIN -->
+    <div class="login-card">
+        <h2>Login</h2>
+
+        <div th:if="${error}" class="alert error" th:text="${error}"></div>
+        <div th:if="${success}" class="alert success" th:text="${success}"></div>
+
+        <form th:action="@{/login}" method="post">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- SIGN-UP -->
+    <div class="signup-card">
+        <h3>Create an account</h3>
+        <form th:action="@{/register}" method="post">
+            <label>Full Name</label>
+            <input type="text" name="fullName" placeholder="Your name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- small credit link (optional) -->
+    <a class="credits-link" href="https://codepen.io/davinci/" target="_blank">
+        check my other pens
+    </a>
+</div>
+
+</body>
+</html>

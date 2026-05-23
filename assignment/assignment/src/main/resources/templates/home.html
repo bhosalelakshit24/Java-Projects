@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment Tracker - Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Top banner -->
+    <header class="banner">
+        <div class="banner-left">
+            <div class="banner-icon calendar">📅</div>
+        </div>
+        <div class="banner-center">
+            <p class="banner-subtitle">Academic Essentials</p>
+            <h1 class="banner-title">Assignment Tracker</h1>
+        </div>
+        <div class="banner-right">
+            <div class="banner-icon clock">🕒</div>
+        </div>
+    </header>
+
+    <!-- White card container -->
+    <div class="card">
+
+        <!-- Top bar inside card -->
+        <div class="card-header">
+            <div class="card-header-left">
+                <div class="stack-icon">☰</div>
+                <h2>Assignment Tracker</h2>
+            </div>
+
+            <nav class="card-header-right">
+                <a th:href="@{/assignments/new}" class="btn-primary">+ New Assignment</a>
+
+                <form th:action="@{/logout}" method="post" class="logout-form">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit">Logout</button>
+                </form>
+            </nav>
+        </div>
+
+        <!-- ASSIGNMENTS SECTION -->
+        <section class="section">
+            <div class="section-title-bar">
+                <h3>Assignments</h3>
+            </div>
+
+            <div class="filter-row">
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        Unfinished
+                    </label>
+                    <label>
+                        <input type="checkbox" disabled>
+                        Finished
+                    </label>
+                </div>
+            </div>
+
+            <div th:if="${#lists.isEmpty(assignments)}" class="empty-state">
+                No assignments yet. <a th:href="@{/assignments/new}">Add your first assignment.</a>
+            </div>
+
+            <div th:if="${!#lists.isEmpty(assignments)}" class="table-wrapper">
+                <table class="assignment-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Days Left</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="a : ${assignments}">
+                        <td th:text="${a.title}">Quadratics Test</td>
+                        <td>
+                            <span class="pill pill-course" th:text="${a.subject}">MATH123</span>
+                        </td>
+                        <td>
+                            <span th:text="${a.status}"
+                                  th:classappend="${a.status == 'DONE'} ? 'pill-status done' : 'pill-status inprogress'">
+                                In progress
+                            </span>
+                        </td>
+                        <td th:text="${a.dueDate}">2025-09-28</td>
+                        <!-- Days left will be filled by JS based on data-duedate -->
+                        <td class="days-left"
+                            th:attr="data-duedate=${a.dueDate}"></td>
+
+                        <td class="actions">
+                            <a th:href="@{/assignments/edit/{id}(id=${a.id})}" class="btn-muted">Edit</a>
+
+                            <form th:action="@{/assignments/{id}/delete(id=${a.id})}"
+                                  method="post"
+                                  onsubmit="return confirm('Delete this assignment?');">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button type="submit" class="btn-danger">Delete</button>
+                            </form>
+
+                            <form th:if="${a.status != 'DONE'}"
+                                  th:action="@{/assignments/{id}/done(id=${a.id})}"
+                                  method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button type="submit" class="btn-success">Mark done</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- UPCOMING DEADLINES SECTION -->
+        <section class="section">
+            <div class="section-title-bar">
+                <h3>Upcoming Deadlines</h3>
+            </div>
+
+            <div class="table-wrapper small-table">
+                <table class="assignment-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Due Date</th>
+                        <th>Days Left</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Show only assignments that are not DONE -->
+                    <tr th:each="a : ${assignments}"
+                        th:if="${a.status != 'DONE'}">
+                        <td th:text="${a.title}">Final Exam</td>
+                        <td>
+                            <span class="pill pill-course" th:text="${a.subject}">ENGL312</span>
+                        </td>
+                        <td th:text="${a.dueDate}">2025-09-30</td>
+                        <td class="days-left"
+                            th:attr="data-duedate=${a.dueDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div><!-- /card -->
+</div><!-- /page -->
+
+<!-- Small script just to compute "days left" on the client -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cells = document.querySelectorAll(".days-left");
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        cells.forEach(cell => {
+            const dueStr = cell.getAttribute("data-duedate");
+            if (!dueStr) return;
+
+            const due = new Date(dueStr);
+            if (isNaN(due.getTime())) {
+                cell.textContent = "-";
+                return;
+            }
+            due.setHours(0,0,0,0);
+
+            const diffMs = due - today;
+            const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0) {
+                cell.textContent = diffDays + " days left";
+                cell.classList.add("days-positive");
+            } else if (diffDays === 0) {
+                cell.textContent = "Due today";
+                cell.classList.add("days-today");
+            } else {
+                cell.textContent = (diffDays) + " days";
+                cell.classList.add("days-overdue");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

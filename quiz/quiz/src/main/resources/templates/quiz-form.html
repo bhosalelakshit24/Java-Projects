@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${quiz.id} != null ? 'Edit Quiz' : 'Add Quiz'">Quiz</title>
+    <link rel="stylesheet" th:href="@{/css/quiz.css}">
+</head>
+<body>
+<div class="layout">
+    <header class="topbar">
+        <h1 th:text="${quiz.id} != null ? 'Edit Quiz' : 'Add Quiz'">Add Quiz</h1>
+        <a th:href="@{/quizzes}" class="btn">Back</a>
+    </header>
+
+    <main>
+        <div class="form-card">
+            <form th:action="@{/quizzes/save}" th:object="${quiz}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+
+                <label>Title</label>
+                <input type="text" th:field="*{title}" required>
+
+                <label>Category</label>
+                <input type="text" th:field="*{category}" placeholder="Java, Networking..." required>
+
+                <label>Description</label>
+                <textarea th:field="*{description}" rows="3"></textarea>
+
+                <label>Total Questions</label>
+                <input type="number" th:field="*{totalQuestions}" min="1" required>
+
+                <label>Marks per Question</label>
+                <input type="number" th:field="*{marksPerQuestion}" min="1" required>
+
+                <div class="form-actions">
+                    <a th:href="@{/quizzes}" class="btn">Cancel</a>
+                    <button type="submit" class="btn primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

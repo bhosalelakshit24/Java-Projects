@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes App | Login</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          referrerpolicy="no-referrer"/>
+</head>
+<body>
+
+<!-- flash messages -->
+<div class="flash-container">
+    <div th:if="${error}" class="flash flash-error" th:text="${error}"></div>
+    <div th:if="${success}" class="flash flash-success" th:text="${success}"></div>
+</div>
+
+<div class="materialContainer">
+
+    <!-- LOGIN BOX -->
+    <div class="box">
+
+        <div class="title">LOGIN</div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="input">
+                <label for="loginEmail">Email</label>
+                <input type="email" name="email" id="loginEmail" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="input">
+                <label for="loginPass">Password</label>
+                <input type="password" name="password" id="loginPass" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="button login">
+                <button type="submit"><span>GO</span> <i class="fa fa-check"></i></button>
+            </div>
+        </form>
+
+        <a href="#" class="pass-forgot">Forgot your password?</a>
+
+    </div>
+
+    <!-- REGISTER OVERBOX -->
+    <div class="overbox">
+        <div class="material-button alt-2"><span class="shape"></span></div>
+
+        <div class="title">REGISTER</div>
+
+        <form th:action="@{/register}" method="post">
+            <div class="input">
+                <label for="regname">Full name</label>
+                <input type="text" name="fullName" id="regname" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="input">
+                <label for="regEmail">Email</label>
+                <input type="email" name="email" id="regEmail" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="input">
+                <label for="regpass">Password</label>
+                <input type="password" name="password" id="regpass" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="input">
+                <label for="reregpass">Repeat Password</label>
+                <!-- only for front-end; backend ignores -->
+                <input type="password" name="confirmPassword" id="reregpass" required>
+                <span class="spin"></span>
+            </div>
+
+            <div class="button">
+                <button type="submit"><span>NEXT</span></button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/auth.js}"></script>
+</body>
+</html>

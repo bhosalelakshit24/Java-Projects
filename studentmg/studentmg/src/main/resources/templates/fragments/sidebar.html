@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- SIDEBAR FRAGMENT -->
+<div th:fragment="sidebar(activePage)">
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">S</div>
+            <div class="logo-text">
+                <div class="logo-title">Schola</div>
+                <div class="logo-sub">Student Admin</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a th:href="@{/home}"
+               th:class="${activePage} == 'home' ? 'nav-item active' : 'nav-item'">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a th:href="@{/inbox}"
+               th:class="${activePage} == 'inbox' ? 'nav-item active' : 'nav-item'">
+                <span class="nav-icon">📥</span>
+                <span>Inbox</span>
+            </a>
+
+            <a th:href="@{/calendar}"
+               th:class="${activePage} == 'calendar' ? 'nav-item active' : 'nav-item'">
+                <span class="nav-icon">📅</span>
+                <span>Calendar</span>
+            </a>
+
+            <a th:href="@{/teachers}"
+               th:class="${activePage} == 'teachers' ? 'nav-item active' : 'nav-item'">
+                <span class="nav-icon">👩‍🏫</span>
+                <span>Teachers</span>
+            </a>
+
+            <a th:href="@{/attendance}"
+               th:class="${activePage} == 'attendance' ? 'nav-item active' : 'nav-item'">
+                <span class="nav-icon">🧑‍🎓</span>
+                <span>Students</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <form th:action="@{/logout}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+
+    </aside>
+</div>
+</body>
+</html>

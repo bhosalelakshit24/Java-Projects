@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat – Gym</title>
+    <link rel="stylesheet" th:href="@{/css/gym-dashboard.css}">
+</head>
+<body>
+<div class="gym-app">
+
+    <div th:replace="fragments/sidebar :: sidebar('chat')"></div>
+
+    <main class="gym-main">
+        <header class="gym-topbar">
+            <h2>Chat</h2>
+        </header>
+
+        <section class="chat-layout">
+
+            <div class="card chat-list">
+                <h3>Messages Friends</h3>
+                <div class="chat-list-item active">
+                    <div class="avatar-circle small">J</div>
+                    <div>
+                        <div class="chat-name">Jenny Wilson</div>
+                        <div class="chat-preview">My arm hurts, should I...</div>
+                    </div>
+                </div>
+                <div class="chat-list-item">
+                    <div class="avatar-circle small">A</div>
+                    <div>
+                        <div class="chat-name">Arlene McCoy</div>
+                        <div class="chat-preview">We should try HIIT...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card chat-window">
+                <div class="chat-header">
+                    <div class="chat-user">
+                        <div class="avatar-circle small">J</div>
+                        <div>
+                            <div class="chat-name">Jenny Wilson</div>
+                            <div class="chat-status">Last online 2 minutes ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-messages">
+                    <div class="msg msg-left">
+                        My arm hurts, should I do chest exercises instead of biceps?
+                    </div>
+                    <div class="msg msg-right">
+                        Maybe rest is better now, try asking your trainer.
+                    </div>
+                    <div class="msg msg-left">
+                        Ok I will ask, what kind of protein are you using?
+                    </div>
+                </div>
+
+                <form class="chat-input">
+                    <input type="text" placeholder="Type a message..">
+                    <button type="submit">⬆️</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+</div>
+</body>
+</html>

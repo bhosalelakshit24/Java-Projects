@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar – Student Management</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<div class="app">
+
+    <div th:replace="fragments/sidebar :: sidebar('calendar')"></div>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Calendar</h1>
+                <span class="breadcrumb">Dashboard / Calendar</span>
+            </div>
+            <div class="topbar-right">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search events" />
+                </div>
+                <div class="user-chip">
+                    <div class="avatar-circle"
+                         th:text="${loggedUser != null ? #strings.substring(loggedUser,0,1) : 'U'}">U</div>
+                    <div class="user-info">
+                        <span class="user-name" th:text="${loggedUser}">User</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="layout-two-col calendar-layout">
+
+            <div class="card">
+                <div class="card-header-row">
+                    <h2 class="card-title">March 2035</h2>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Day</button>
+                        <button class="btn-secondary">Week</button>
+                        <button class="btn-primary">Month</button>
+                    </div>
+                </div>
+
+                <table class="calendar-table">
+                    <thead>
+                    <tr>
+                        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+                        <th>Thu</th><th>Fri</th><th>Sat</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
+                    </tr>
+                    <tr>
+                        <td>12<br><span class="pill pill-good">English Exam</span></td>
+                        <td>13</td><td>14</td><td>15<br><span class="pill pill-attendance">Results</span></td>
+                        <td>16</td><td>17</td><td>18</td>
+                    </tr>
+                    <tr>
+                        <td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td>
+                    </tr>
+                    <tr>
+                        <td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card small-card">
+                <div class="card-title">Schedule Details</div>
+                <div class="schedule-block">
+                    <strong>English Literature Exam</strong><br>
+                    12 March 2035 • 09:00 – 11:00 AM<br>
+                    Room 204
+                </div>
+                <div class="schedule-note">
+                    Bring your own stationery. No electronic devices allowed.
+                </div>
+
+                <hr class="divider">
+
+                <div class="card-title">Upcoming Events</div>
+                <ul class="simple-list">
+                    <li>Parent-Teacher Meeting – 18 March</li>
+                    <li>Science Fair – 28 March</li>
+                    <li>Annual Sports Day – 04 April</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+</body>
+</html>

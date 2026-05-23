@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar – Gym</title>
+    <link rel="stylesheet" th:href="@{/css/gym-dashboard.css}">
+</head>
+<body>
+<div class="gym-app">
+
+    <div th:replace="fragments/sidebar :: sidebar('calendar')"></div>
+
+    <main class="gym-main">
+        <header class="gym-topbar">
+            <h2>Exercise Calendar</h2>
+        </header>
+
+        <section class="calendar-layout">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Exercise Absent</h3>
+                    <div class="toggle-group">
+                        <button class="toggle active">Week</button>
+                        <button class="toggle">Month</button>
+                    </div>
+                </div>
+                <div class="calendar-grid">
+                    <!-- simple static mock of week schedule -->
+                    <div class="cal-day">
+                        <div class="cal-day-name">Sun 12</div>
+                        <div class="cal-block">Muscle therapy<br>07:00–09:00</div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-day-name">Mon 13</div>
+                        <div class="cal-block">Boxing lessons<br>08:00–10:00</div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-day-name">Tue 14</div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-day-name">Wed 15</div>
+                    </div>
+                    <div class="cal-day">
+                        <div class="cal-day-name">Thu 16</div>
+                        <div class="cal-block">Check for stomach ache<br>09:00–11:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card calendar-side">
+                <h3>September 2021</h3>
+                <div class="mini-calendar">
+                    <!-- just a static grid; you can build properly later -->
+                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                    <!-- rows omitted for brevity -->
+                </div>
+                <div class="exercise-volume">
+                    <h4>Exercise Volume</h4>
+                    <div class="volume-bar"></div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
+</body>
+</html>

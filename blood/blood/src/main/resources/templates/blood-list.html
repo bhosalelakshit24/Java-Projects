@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Bank Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/blood.css}">
+</head>
+<body>
+
+<div class="layout">
+    <header class="topbar">
+        <div>
+            <h1>Blood Bank</h1>
+            <p th:text="'Welcome, ' + ${name}">Welcome</p>
+        </div>
+        <div>
+            <a th:href="@{/blood/new}" class="btn primary">+ Add Record</a>
+            <a th:href="@{/logout}" class="btn">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Donor</th>
+                <th>Blood Group</th>
+                <th>Units</th>
+                <th>City</th>
+                <th>Hospital</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${records}">
+                <td th:text="${r.id}">1</td>
+                <td th:text="${r.donorName}">John Doe</td>
+                <td th:text="${r.bloodGroup}">A+</td>
+                <td th:text="${r.units}">2</td>
+                <td th:text="${r.city}">Ahmedabad</td>
+                <td th:text="${r.hospital}">Civil Hospital</td>
+                <td th:text="${r.contactNumber}">9999999999</td>
+                <td th:text="${r.donationDate}">2025-01-01</td>
+                <td th:text="${r.status}">AVAILABLE</td>
+                <td>
+                    <a th:href="@{'/blood/edit/' + ${r.id}}" class="btn small">Edit</a>
+                    <a th:href="@{'/blood/delete/' + ${r.id}}" class="btn small danger"
+                       onclick="return confirm('Delete this record?');">Delete</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(records)}">
+                <td colspan="10">No blood records yet. Click "Add Record" to create one.</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+</body>
+</html>

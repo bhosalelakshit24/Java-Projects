@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Members - Gym App</title>
+    <link rel="stylesheet" th:href="@{/css/gym-dashboard.css}">
+</head>
+<body>
+<div class="gym-app">
+
+    <!-- LEFT SIDEBAR -->
+    <div th:replace="fragments/sidebar :: sidebar('members')"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-wrapper">
+
+        <!-- TOP BAR (same style as dashboard) -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Members</h1>
+                <span class="page-subtitle">Manage all gym members</span>
+            </div>
+
+            <div class="topbar-center">
+                <div class="search-box">
+                    <input type="text" placeholder="Search members...">
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <div class="user-pill">
+                    <div class="user-avatar"
+                         th:text="${#strings.substring(loggedUser,0,1)}">U</div>
+                    <div class="user-info">
+                        <span class="user-name" th:text="${loggedUser}">User</span>
+                        <span class="user-role">Member</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- HEADER + ADD BUTTON -->
+        <section class="members-header-row">
+            <div>
+                <h2 class="section-title">Members</h2>
+                <span class="section-subtitle" th:text="${#lists.size(members)} + ' total members'">
+                    0 total members
+                </span>
+            </div>
+
+            <a class="btn-primary" th:href="@{/members/new}">+ Add Member</a>
+        </section>
+
+        <!-- MEMBERS TABLE CARD -->
+        <section class="card members-card">
+            <table class="members-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Membership</th>
+                    <th>Status</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m, iterStat : ${members}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${m.fullName}">Demo Name</td>
+                    <td th:text="${m.email}">demo@email.com</td>
+                    <td th:text="${m.phone}">1234567890</td>
+                    <td th:text="${m.membershipType}">Monthly</td>
+                    <td>
+                        <span class="status-pill"
+                              th:text="${m.status}"
+                              th:classappend="${m.status} == 'ACTIVE' ? ' status-active' :
+                                              (${m.status} == 'PAUSED' ? ' status-paused' :
+                                                                        ' status-expired')">
+                            ACTIVE
+                        </span>
+                    </td>
+                    <td th:text="${m.startDate}">2025-01-01</td>
+                    <td th:text="${m.endDate}">2025-02-01</td>
+                    <td class="members-actions">
+                        <a th:href="@{/members/edit/{id}(id=${m.id})}" class="btn-small">Edit</a>
+                        <a th:href="@{/members/delete/{id}(id=${m.id})}"
+                           class="btn-small btn-danger"
+                           onclick="return confirm('Delete this member?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(members)}">
+                    <td colspan="9" class="empty-row">No members yet. Click “Add Member”.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>

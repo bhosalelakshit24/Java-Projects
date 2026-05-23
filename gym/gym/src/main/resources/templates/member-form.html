@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${formTitle}">Member Form</title>
+    <link rel="stylesheet" th:href="@{/css/gym-dashboard.css}">
+</head>
+<body>
+<div class="gym-app">
+
+    <!-- LEFT SIDEBAR -->
+    <div th:replace="fragments/sidebar :: sidebar('members')"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-wrapper">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title" th:text="${formTitle}">Add Member</h1>
+                <span class="page-subtitle">Fill the details below</span>
+            </div>
+
+            <div class="topbar-center">
+                <div class="search-box">
+                    <input type="text" placeholder="Search members...">
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <div class="user-pill">
+                    <div class="user-avatar"
+                         th:text="${#strings.substring(loggedUser,0,1)}">U</div>
+                    <div class="user-info">
+                        <span class="user-name" th:text="${loggedUser}">User</span>
+                        <span class="user-role">Member</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- FORM CARD -->
+        <section class="card member-form-card">
+            <h2 class="section-title" th:text="${formTitle}">Add Member</h2>
+
+            <form th:action="@{/members}" th:object="${member}" method="post" class="member-form">
+
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="fullName">Full Name</label>
+                        <input id="fullName" type="text" th:field="*{fullName}" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" th:field="*{email}" placeholder="example@mail.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="phone">Phone</label>
+                        <input id="phone" type="text" th:field="*{phone}" placeholder="Mobile number">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="membershipType">Membership Type</label>
+                        <select id="membershipType" th:field="*{membershipType}">
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="status">Status</label>
+                        <select id="status" th:field="*{status}">
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="PAUSED">PAUSED</option>
+                            <option value="EXPIRED">EXPIRED</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="startDate">Start Date</label>
+                        <input id="startDate" type="date" th:field="*{startDate}">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="endDate">End Date</label>
+                        <input id="endDate" type="date" th:field="*{endDate}">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save</button>
+                    <a th:href="@{/members}" class="btn-secondary">Cancel</a>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>
